@@ -16,18 +16,19 @@
 
   /**
    * Vertical Scrolling Adjustments
-   */
+
   &.scroll-vertical {
-    .datatable-body {
+    .datatable-wrapper {
       overflow-y:auto;
     }
   }
-
+   */
   /**
    * Horizontal Scrolling Adjustments
-   */
+     */
+
   &.scroll-horz {
-    .datatable-body {
+    .datatable-wrapper {
       overflow-x:auto;
     }
   }

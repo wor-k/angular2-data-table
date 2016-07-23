@@ -21,6 +21,7 @@ import { DataTableColumn } from './DataTableColumn';
 import { DataTableHeader } from './header/Header';
 import { DataTableBody } from './body/Body';
 import { DataTableFooter } from './footer/Footer';
+import { Scroller } from '../directives/Scroller';
 import './datatable.scss';
 
 @Component({
@@ -29,13 +30,23 @@ import './datatable.scss';
   	<div
       visibility-observer
       (onVisibilityChange)="adjustSizes()">
-      <datatable-header
-        (onColumnChange)="onColumnChange.emit($event)">
-      </datatable-header>
-      <datatable-body
-        (onRowClick)="onRowClick.emit($event)"
-        (onRowSelect)="onRowSelect($event)">
-      </datatable-body>
+      <div class="datatable-wrapper">
+            <div
+              scroller
+              *ngIf="state.rows.length"
+              [rowHeight]="state.options.rowHeight"
+              [count]="state.rowCount"
+              [scrollWidth]="state.columnGroupWidths.total">
+
+              <datatable-header
+                (onColumnChange)="onColumnChange.emit($event)">
+              </datatable-header>
+              <datatable-body
+                (onRowClick)="onRowClick.emit($event)"
+                (onRowSelect)="onRowSelect($event)">
+              </datatable-body>
+            </div>
+      </div>
       <datatable-footer
         (onPageChange)="onPageChanged($event)">
       </datatable-footer>
@@ -45,7 +56,8 @@ import './datatable.scss';
     DataTableHeader,
     DataTableBody,
     DataTableFooter,
-    Visibility
+    Visibility,
+    Scroller
   ],
   host: {
     '[class.fixed-header]': 'options.headerHeight !== "auto"',

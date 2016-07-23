@@ -31,10 +31,22 @@ export class App {
     headerHeight: 50,
     footerHeight: 50,
     rowHeight: 'auto',
+    scrollbarH: true,
+    scrollbarV: true,
     columns: [
       new TableColumn({ name: "Name" }),
       new TableColumn({ name: "Gender" }),
-      new TableColumn({ name: "Company" })
+      new TableColumn({ name: "Company" }),
+      new TableColumn({ name: "Company2" }),
+      new TableColumn({ name: "Company3" }),
+      new TableColumn({ name: "Company4" }),
+      new TableColumn({ name: "Company5" }),
+      new TableColumn({ name: "Company6" }),
+      new TableColumn({ name: "Company7" }),
+      new TableColumn({ name: "Company8" }),
+      new TableColumn({ name: "Company9" }),
+      new TableColumn({ name: "Company10" }),
+
     ]
   });
 
@@ -46,7 +58,7 @@ export class App {
 
   fetch(cb) {
     var req = new XMLHttpRequest();
-    req.open('GET', `src/demos/company.json`);
+    req.open('GET', `src/demos/foo.json`);
 
     req.onload = () => {
       cb(JSON.parse(req.response));
