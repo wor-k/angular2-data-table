@@ -44,9 +44,11 @@ export class StateService {
   }
 
   get pageSize() {
-    if(this.options.scrollbarV) {
-      return Math.ceil(this.bodyHeight / this.options.rowHeight) + 1;
-    } else if(this.options.limit) {
+    // if(this.options.scrollbarV) {
+    //   console.log('cc', this.bodyHeight, this.options.rowHeight);
+    //   return Math.ceil(this.bodyHeight / this.options.rowHeight) + 1;
+    // } else if(this.options.limit) {
+    if(this.options.limit) {
       return this.options.limit;
     } else {
       return this.rows.length;
@@ -61,8 +63,10 @@ export class StateService {
       const floor = Math.floor((this.offsetY || 0) / this.options.rowHeight);
       first = Math.max(floor, 0);
       last = Math.min(first + this.pageSize, this.pageCount);
+      // console.log('dd', first, last, this.pageSize, this.pageCount);
     } else {
-      first = Math.max(this.options.offset * this.pageSize, 0);
+      // first = Math.max(this.options.offset * this.pageSize, 0);
+      first = 0;
       last = Math.min(first + this.pageSize, this.pageCount);
     }
 
