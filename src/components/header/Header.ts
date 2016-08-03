@@ -18,7 +18,7 @@ import { DataTableHeaderCell } from './HeaderCell';
   selector: 'datatable-header',
   template: `
   	<div
-      [style.width]="state.columnGroupWidths.total"
+      [style.width]="state.columnGroupWidths.total + 'px'"
       [style.left]="-state.HScrollPos + 'px'"
       class="datatable-header-inner"
       orderable

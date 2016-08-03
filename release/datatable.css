@@ -55,7 +55,19 @@
         text-overflow: ellipsis; }
   .datatable .datatable-body-row,
   .datatable .datatable-header-inner {
-    display: inline-block; }
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    -webkit-flex-flow: row;
+    -moz-flex-flow: row;
+    -ms-flex-flow: row;
+    -o-flex-flow: row;
+    flex-flow: row;
+    flex-flow: row;
+    flex-wrap: nowrap; }
   .datatable .datatable-body-cell,
   .datatable .datatable-header-cell {
     vertical-align: top;
