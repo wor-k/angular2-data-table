@@ -195,10 +195,7 @@ var StateService = (function () {
     });
     Object.defineProperty(StateService.prototype, "pageSize", {
         get: function () {
-            if (this.options.scrollbarV) {
-                return Math.ceil(this.bodyHeight / this.options.rowHeight) + 1;
-            }
-            else if (this.options.limit) {
+            if (this.options.limit) {
                 return this.options.limit;
             }
             else {
@@ -218,7 +215,7 @@ var StateService = (function () {
                 last = Math.min(first + this.pageSize, this.pageCount);
             }
             else {
-                first = Math.max(this.options.offset * this.pageSize, 0);
+                first = 0;
                 last = Math.min(first + this.pageSize, this.pageCount);
             }
             return { first: first, last: last };
@@ -1622,7 +1619,7 @@ var DataTable = (function () {
             return;
         var width = this.state.innerWidth;
         if (this.options.scrollbarV) {
-            width = -this.state.scrollbarWidth;
+            width = width - this.state.scrollbarWidth;
         }
         if (this.options.columnMode === exports.ColumnMode.force) {
             forceFillColumnWidths(this.options.columns, width, forceIdx);

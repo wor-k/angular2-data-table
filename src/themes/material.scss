@@ -26,38 +26,39 @@
 	 * Header Styles
 	 */
 	.datatable-header {
-	border: 0px solid #dfdfdf;
-	border-top: 2px solid #dfdfdf;
-	border-collapse: collapse;
+		border: 0px solid #dfdfdf;
+		border-top: 2px solid #dfdfdf;
+		border-collapse: collapse;
+		.datatable-header-inner{
+			height: 100%;
+		    .datatable-header-cell {
+		        text-align: left;
+			    vertical-align: bottom;
+			    line-height: 1.42857143;
+			    border: 1px solid #ddd;
+			    cursor: pointer;
+			    border-top: 0;
+			    border-bottom-width: 0px;
+			    background: #ffffff;
+			    color: #777777;
+			    height: 100%;
+			    border-color: #eee;
+			    font-weight: bold;
+			    padding: 3px 0px 3px 10px;
+					&.longpress {
+						color:#00E676;
+					}
 
-    .datatable-header-cell {
-         text-align: left;
-	    padding: 3px 0px 3px 10px;
-	    vertical-align: bottom;
-	    line-height: 1.42857143;
-	    border: 1px solid #ddd;
-	    cursor: pointer;
-	    border-top: 0;
-	    padding-left: 5px;
-	    border-bottom-width: 0px;
-	    background: #ffffff;
-	    color: #777777;
-	    height: 100%;
-	    border-color: #eee;
-			&.longpress {
-				color:#00E676;
-			}
-
-			&.dragging {
-				.resize-handle {
-					border-right: none;
-				}
-			}
-    }
-
-    .resize-handle {
-      border-right:solid 1px #eee;
-    }
+					&.dragging {
+						.resize-handle {
+							border-right: none;
+						}
+					}
+		    }
+		}
+	    .resize-handle {
+	      border-right:solid 1px #eee;
+	    }
   }
 
 	/**
@@ -65,14 +66,14 @@
 	 */
 	.datatable-body {
 	  .datatable-body-row {
-	  	border: 1px solid #eee;
+	  	// border: 1px solid #eee;
 
 	    .datatable-body-cell {
+	   	  border: 1px solid #fff;
 	      vertical-align: middle;
-	      border-color: #fff;
 	      padding: 5px;
 	      line-height: 1.42857143;
-
+	      height: 100%;
 	      -webkit-transition: width 0.3s ease;
 	      -o-transition: width 0.3s ease;
 	      transition: width 0.3s ease;

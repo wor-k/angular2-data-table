@@ -153,7 +153,8 @@ export class DataTable {
 
     let width = this.state.innerWidth;
     if(this.options.scrollbarV) {
-      width =- this.state.scrollbarWidth;
+      // width =- this.state.scrollbarWidth;
+      width = width - this.state.scrollbarWidth;
     }
 
     if(this.options.columnMode === ColumnMode.force) {
