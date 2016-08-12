@@ -12,6 +12,7 @@ import { StateService } from '../../services/State';
   template: `
     <div
       [style.width]="state.columnGroupWidths.total"
+      [style.left]="-state.HScrollPos + 'px'"
       class="datatable-header-inner"
       orderable
       (onReorder)="columnReordered($event)">

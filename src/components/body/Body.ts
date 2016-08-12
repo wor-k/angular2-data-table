@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit, HostBinding, OnDestroy, ElementRef } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, HostBinding, HostListener, OnDestroy, ElementRef } from '@angular/core';
 import { StateService } from '../../services/State';
 import { SelectionType } from '../../enums/SelectionType';
 import { Keys } from '../../utils/keys';
@@ -90,6 +90,12 @@ export class DataTableBody implements OnInit, OnDestroy {
   rowClicked(event, index, row): void {
     this.onRowClick.emit({event, row});
     this.selectRow(event, index, row);
+  }
+
+  @HostListener('scroll', ['$event']) onScroll(event) {
+    if(this.state.options.scrollbarH){
+      this.state.HScrollPos = event.target.scrollLeft;
+    }
   }
 
   rowKeydown(event, index, row) {

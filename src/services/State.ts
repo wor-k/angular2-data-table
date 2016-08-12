@@ -23,6 +23,7 @@ export class StateService {
   offsetY: number = 0;
   innerWidth: number = 0;
   bodyHeight: number = 300;
+  HScrollPos: number = 0;
 
   get columnsByPin() {
     return columnsByPin(this.options.columns);
