@@ -88,7 +88,8 @@
     display: block; }
     .datatable .datatable-header .datatable-header-inner {
       align-items: stretch;
-      -webkit-align-items: stretch; }
+      -webkit-align-items: stretch;
+      position: relative; }
     .datatable .datatable-header .datatable-header-cell {
       position: relative;
       display: inline-block; }

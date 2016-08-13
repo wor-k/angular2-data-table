@@ -10,6 +10,9 @@
  * 	  });
  *
  */
+ import { IntersectionObserver } from '../angular2-data-table';
+
+
 export class VisibilityObserver {
 
   observer: IntersectionObserver;

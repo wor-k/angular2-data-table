@@ -19,13 +19,14 @@ import { forceFillColumnWidths, adjustColumnWidths } from '../utils/math';
 import { ColumnMode } from '../enums/ColumnMode';
 import { TableOptions } from '../models/TableOptions';
 import { TableColumn } from '../models/TableColumn';
-import './datatable.scss';
+// import './datatable.scss';
 
 import { DataTableColumn } from './DataTableColumn';
 import { StateService } from '../services/State';
 
 @Component({
   selector: 'datatable',
+  // styleUrls: ['datatable.scss'],
   template: `
     <div
       visibility-observer
@@ -139,7 +140,7 @@ export class DataTable implements OnInit, DoCheck, AfterViewInit {
 
     let width: number = this.state.innerWidth;
     if (this.options.scrollbarV) {
-      width = -this.state.scrollbarWidth;
+      width = width - this.state.scrollbarWidth;
     }
 
     if (this.options.columnMode === ColumnMode.force) {

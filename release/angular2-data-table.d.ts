@@ -1,4 +1,3 @@
-/// <reference types="core-js" />
 declare module "utils/column" {
     export function columnsByPin(cols: any): {
         left: any[];
@@ -144,6 +143,7 @@ declare module "services/State" {
         offsetY: number;
         innerWidth: number;
         bodyHeight: number;
+        HScrollPos: number;
         readonly columnsByPin: {
             left: any[];
             center: any[];
@@ -171,7 +171,6 @@ declare module "services/State" {
 declare module "components/DataTable" {
     import { ElementRef, EventEmitter, KeyValueDiffers, OnInit, QueryList, DoCheck, AfterViewInit } from '@angular/core';
     import { TableOptions } from "models/TableOptions";
-    import './datatable.scss';
     import { DataTableColumn } from "components/DataTableColumn";
     import { StateService } from "services/State";
     export class DataTable implements OnInit, DoCheck, AfterViewInit {
@@ -204,95 +203,6 @@ declare module "components/DataTable" {
         readonly isHorScroll: boolean;
         readonly isSelectable: boolean;
         readonly isCheckboxable: boolean;
-    }
-}
-declare module "directives/LongPress" {
-    import { EventEmitter } from '@angular/core';
-    export class LongPress {
-        duration: number;
-        onLongPress: EventEmitter<any>;
-        onLongPressing: EventEmitter<any>;
-        onLongPressEnd: EventEmitter<any>;
-        private pressing;
-        private longPressing;
-        private timeout;
-        private mouseX;
-        private mouseY;
-        readonly press: boolean;
-        readonly longPress: boolean;
-        onMouseDown(event: any): void;
-        onMouseMove(event: any): void;
-        loop(event: any): void;
-        endPress(): void;
-        onMouseUp(): void;
-    }
-}
-declare module "directives/Draggable" {
-    import { ElementRef, EventEmitter } from '@angular/core';
-    export class Draggable {
-        element: HTMLElement;
-        model: any;
-        dragX: boolean;
-        dragY: boolean;
-        onDragStart: EventEmitter<any>;
-        onDragging: EventEmitter<any>;
-        onDragEnd: EventEmitter<any>;
-        private dragging;
-        private subscription;
-        constructor(element: ElementRef);
-        onMouseup(event: any): void;
-        onMousedown(event: any): void;
-        move(event: any, mouseDownPos: any): void;
-    }
-}
-declare module "directives/Resizeable" {
-    import { ElementRef, EventEmitter } from '@angular/core';
-    export class Resizeable {
-        resizeEnabled: boolean;
-        minWidth: number;
-        maxWidth: number;
-        onResize: EventEmitter<any>;
-        private element;
-        private subscription;
-        private prevScreenX;
-        private resizing;
-        constructor(element: ElementRef);
-        onMouseup(): void;
-        onMousedown(event: any): void;
-        move(event: any): void;
-    }
-}
-declare module "directives/Orderable" {
-    import { EventEmitter } from '@angular/core';
-    export class Orderable {
-        onReorder: EventEmitter<any>;
-        private drags;
-        private positions;
-        ngAfterContentInit(): void;
-        onDragStart(): void;
-        onDragEnd({element, model}: {
-            element: any;
-            model: any;
-        }): void;
-    }
-}
-declare module "components/header/HeaderCell" {
-    import { ElementRef, EventEmitter } from '@angular/core';
-    import { StateService } from "services/State";
-    import { TableColumn } from "models/TableColumn";
-    import { SortDirection } from "enums/SortDirection";
-    export class DataTableHeaderCell {
-        element: ElementRef;
-        private state;
-        model: TableColumn;
-        onColumnChange: EventEmitter<any>;
-        readonly sortDir: SortDirection;
-        constructor(element: ElementRef, state: StateService);
-        sortClasses(sort: any): {
-            'sort-asc icon-down': boolean;
-            'sort-desc icon-up': boolean;
-        };
-        onSort(): void;
     }
 }
 declare module "components/header/Header" {
@@ -341,6 +251,7 @@ declare module "components/body/Body" {
         ngOnInit(): void;
         hideIndicator(): void;
         rowClicked(event: any, index: any, row: any): void;
+        onScroll(event: any): void;
         rowKeydown(event: any, index: any, row: any): void;
         selectRow(event: any, index: any, row: any): void;
         ngOnDestroy(): void;
@@ -355,6 +266,25 @@ declare module "components/footer/Footer" {
         readonly visible: boolean;
         readonly curPage: number;
         constructor(elm: ElementRef, state: StateService);
+    }
+}
+declare module "components/header/HeaderCell" {
+    import { ElementRef, EventEmitter } from '@angular/core';
+    import { StateService } from "services/State";
+    import { TableColumn } from "models/TableColumn";
+    import { SortDirection } from "enums/SortDirection";
+    export class DataTableHeaderCell {
+        element: ElementRef;
+        private state;
+        model: TableColumn;
+        onColumnChange: EventEmitter<any>;
+        readonly sortDir: SortDirection;
+        constructor(element: ElementRef, state: StateService);
+        sortClasses(sort: any): {
+            'sort-asc icon-down': boolean;
+            'sort-desc icon-up': boolean;
+        };
+        onSort(): void;
     }
 }
 declare module "components/footer/Pager" {
@@ -406,6 +336,7 @@ declare module "components/body/BodyCell" {
     }
 }
 declare module "utils/VisibilityObserver" {
+    import { IntersectionObserver } from "angular2-data-table";
     export class VisibilityObserver {
         observer: IntersectionObserver;
         callback: any;
@@ -423,6 +354,76 @@ declare module "directives/Visibility" {
         onVisibilityChange: EventEmitter<any>;
         constructor(element: ElementRef);
         visbilityChange(): void;
+    }
+}
+declare module "directives/LongPress" {
+    import { EventEmitter } from '@angular/core';
+    export class LongPress {
+        duration: number;
+        onLongPress: EventEmitter<any>;
+        onLongPressing: EventEmitter<any>;
+        onLongPressEnd: EventEmitter<any>;
+        private pressing;
+        private longPressing;
+        private timeout;
+        private mouseX;
+        private mouseY;
+        readonly press: boolean;
+        readonly longPress: boolean;
+        onMouseDown(event: any): void;
+        onMouseMove(event: any): void;
+        loop(event: any): void;
+        endPress(): void;
+        onMouseUp(): void;
+    }
+}
+declare module "directives/Resizeable" {
+    import { ElementRef, EventEmitter } from '@angular/core';
+    export class Resizeable {
+        resizeEnabled: boolean;
+        minWidth: number;
+        maxWidth: number;
+        onResize: EventEmitter<any>;
+        private element;
+        private subscription;
+        private prevScreenX;
+        private resizing;
+        constructor(element: ElementRef);
+        onMouseup(): void;
+        onMousedown(event: any): void;
+        move(event: any): void;
+    }
+}
+declare module "directives/Draggable" {
+    import { ElementRef, EventEmitter } from '@angular/core';
+    export class Draggable {
+        element: HTMLElement;
+        model: any;
+        dragX: boolean;
+        dragY: boolean;
+        onDragStart: EventEmitter<any>;
+        onDragging: EventEmitter<any>;
+        onDragEnd: EventEmitter<any>;
+        private dragging;
+        private subscription;
+        constructor(element: ElementRef);
+        onMouseup(event: any): void;
+        onMousedown(event: any): void;
+        move(event: any, mouseDownPos: any): void;
+    }
+}
+declare module "directives/Orderable" {
+    import { EventEmitter } from '@angular/core';
+    export class Orderable {
+        onReorder: EventEmitter<any>;
+        private drags;
+        private positions;
+        ngAfterContentInit(): void;
+        onDragStart(): void;
+        onDragEnd({element, model}: {
+            element: any;
+            model: any;
+        }): void;
     }
 }
 declare module "directives/Scroller" {
@@ -458,6 +459,15 @@ declare module "angular2-data-table" {
     import { TableOptions } from "models/TableOptions";
     import { TableColumn } from "models/TableColumn";
     import { Sort } from "models/Sort";
+    export interface IntersectionObserver {
+        root: HTMLElement;
+        rootMargin: string;
+        thresholds: Array<number>;
+        disconnect: Function;
+        observe: Function;
+        takeRecords: Function;
+        unobserve: Function;
+    }
     export class Angular2DataTableModule {
     }
     export { TableOptions, TableColumn, Sort, SelectionType, ColumnMode, SortDirection, SortType };

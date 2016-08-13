@@ -26,13 +26,24 @@ import { Scroller } from './directives/Scroller';
 import { TemplateWrapper } from './directives/TemplateWrapper';
 
 // Model/Enums
-import { ColumnMode } from 'enums/ColumnMode';
-import { SortType } from 'enums/SortType';
-import { SortDirection } from 'enums/SortDirection';
-import { SelectionType } from 'enums/SelectionType';
+import { ColumnMode } from './enums/ColumnMode';
+import { SortType } from './enums/SortType';
+import { SortDirection } from './enums/SortDirection';
+import { SelectionType } from './enums/SelectionType';
 import { TableOptions } from './models/TableOptions';
 import { TableColumn } from './models/TableColumn';
 import { Sort } from './models/Sort';
+
+export interface IntersectionObserver {
+  root: HTMLElement;
+  rootMargin: string;
+  thresholds: Array<number>;
+  disconnect: Function;
+  observe: Function;
+  takeRecords: Function;
+  unobserve: Function;
+}
+
 
 @NgModule({
   imports: [
