@@ -21,8 +21,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "outDir": "dist",
     "baseUrl": "src",
+    "lib": ["es6", "dom"],
     "types": [
-      "core-js",
       "node"
     ]
   },
