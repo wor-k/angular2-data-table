@@ -22,15 +22,6 @@ import { StateService } from '../../services/State';
         *ngIf="state.columnsByPin.left.length">
         <datatable-header-cell
           *ngFor="let column of state.columnsByPin.left"
-          resizeable
-          [resizeEnabled]="column.resizeable"
-          (onResize)="columnResized($event, column)"
-          long-press
-          (onLongPress)="drag = true"
-          (onLongPressEnd)="drag = false"
-          draggable
-          [dragX]="column.draggable && drag"
-          [dragY]="false"
           [model]="column"
           (onColumnChange)="onColumnChange.emit($event)">
         </datatable-header-cell>
@@ -41,16 +32,6 @@ import { StateService } from '../../services/State';
         *ngIf="state.columnsByPin.center.length">
         <datatable-header-cell
           *ngFor="let column of state.columnsByPin.center"
-          resizeable
-          [resizeEnabled]="column.resizeable"
-          (onResize)="columnResized($event, column)"
-          long-press
-          (onLongPress)="drag = true"
-          (onLongPressEnd)="drag = false"
-          draggable
-          [dragX]="column.draggable && drag"
-          [dragY]="false"
-          [model]="column"
           (onColumnChange)="onColumnChange.emit($event)">
         </datatable-header-cell>
       </div>
@@ -60,16 +41,6 @@ import { StateService } from '../../services/State';
         *ngIf="state.columnsByPin.right.length">
         <datatable-header-cell
           *ngFor="let column of state.columnsByPin.right"
-          resizeable
-          [resizeEnabled]="column.resizeable"
-          (onResize)="columnResized($event, column)"
-          long-press
-          (onLongPress)="drag = true"
-          (onLongPressEnd)="drag = false"
-          draggable
-          [dragX]="column.draggable && drag"
-          [dragY]="false"
-          [model]="column"
           (onColumnChange)="onColumnChange.emit($event)">
         </datatable-header-cell>
       </div>
