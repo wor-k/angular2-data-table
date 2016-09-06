@@ -17,7 +17,6 @@ import { SortDirection } from '../../enums/SortDirection';
       <span
         class="datatable-header-cell-label draggable"
         *ngIf="!model.headerTemplate"
-        (click)="onSort()"
         [innerHTML]="name">
       </span>
       <template

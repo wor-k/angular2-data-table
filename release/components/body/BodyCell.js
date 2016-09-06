@@ -9,9 +9,11 @@ var DataTableBodyCell = (function () {
     Object.defineProperty(DataTableBodyCell.prototype, "value", {
         get: function () {
             if (!this.row)
-                return '';
+                return '&nbsp';
             var prop = deepGetter_1.deepValueGetter(this.row, this.column.prop);
             var userPipe = this.column.pipe;
+            if (prop == '' || prop == null)
+                prop = '&nbsp';
             return userPipe ? userPipe.transform(prop) : prop;
         },
         enumerable: true,
