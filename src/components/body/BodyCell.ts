@@ -30,9 +30,10 @@ export class DataTableBodyCell {
   }
 
   get value() {
-    if (!this.row) return '';
-    const prop: any = deepValueGetter(this.row, this.column.prop);
+    if (!this.row) return '&nbsp';
+    let prop: any = deepValueGetter(this.row, this.column.prop);
     const userPipe: PipeTransform = this.column.pipe;
+    if (prop == ''||prop ==null) prop =  '&nbsp';
     return userPipe ? userPipe.transform(prop) : prop;
   }
 
