@@ -13,6 +13,7 @@ import { translateXY } from '../../utils/translate';
   template: `
     <div
       [style.width]="state.columnGroupWidths.total + 'px'"
+      [style.height]="headerHeight"
       class="datatable-header-inner"
       orderable
       (onReorder)="columnReordered($event)">
