@@ -36,7 +36,7 @@ import { Scroller } from '../../directives/Scroller';
         <datatable-body-row
           [ngStyle]="getRowsStyles(row)"
           [style.height]="state.options.rowHeight + 'px'"
-          *ngFor="let row of rows; let i = index;"
+          *ngFor="let row of state.rows; let i = index;"
           [attr.tabindex]="i"
           (click)="rowClicked($event, i, row)"
           (keydown)="rowKeydown($event, i, row)"
@@ -47,7 +47,7 @@ import { Scroller } from '../../directives/Scroller';
       </div>
       <div
         class="empty-row"
-        *ngIf="!rows.length"
+        *ngIf="!state.rows.length"
         [innerHTML]="state.options.emptyMessage">
       </div>
     </div>
